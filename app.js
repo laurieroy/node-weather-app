@@ -6,17 +6,24 @@ const argv = yargs
     a: {
       demand: true,
       alias: 'address',
-      descirbe: 'Address to fetch weather for',
+      descirbe: 'Address for where we fetch the weather',
       string: true
     }
   })
-.help()
-.alias('help', 'h')
-.argv;
+  .help()
+  .alias('help', 'h')
+  .argv;
 
 console.log(argv);
 
-let   myAddy  = '&location=1301%20lombard%20street%20philadelphia',
+let encodedAddress =  encodeURIComponent(argv.address);
+console.log(`Addy: ${encodedAddress}`);
+if(argv.address ==='') {
+  encodedAddress='1301%20lombard%20street%20philadelphia';
+  console.log('in if statement');
+}
+
+ let  myAddy  = '&location=${encodedAddress}',
       myURL   = 'http://mapquestapi.com/geocoding/v1/address?',
       myKey   = process.env.WEATHER_APP_KEY;
 
@@ -27,7 +34,7 @@ request({
     json: true 
 }, (error, response, body) => {
   console.log(body.results[0]);
-  console.log(`body: ${body.results[0].locations[0][latLng].lat}`);
-  console.log(`Lat: ${body.results[0].locations.latLng[0].lat}`);
-  // console.log(`Lon: ${body.results[0].locations[0].latLng[1]}`);
+  console.log(`Address: ${body.results[0].providedLocation.location}`);
+  console.log(`Lat: ${body.results[0].locations[0].latLng.lat}`);
+  console.log(`Lon: ${body.results[0].locations[0].latLng.lng}`);
 });
