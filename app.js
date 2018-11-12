@@ -28,13 +28,24 @@ if(argv.address ==='') {
       myKey   = process.env.WEATHER_APP_KEY;
 
 
+
 request({
   //http://www.mapquestapi.com/geocoding/v1/address?key=KEY&location=1600+Pennsylvania+Ave+NW,Washington,DC,20500
     url: myURL + `key=` +`${myKey}` + myAddy,
     json: true 
 }, (error, response, body) => {
-  console.log(body.results[0]);
-  console.log(`Address: ${body.results[0].providedLocation.location}`);
-  console.log(`Lat: ${body.results[0].locations[0].latLng.lat}`);
-  console.log(`Lon: ${body.results[0].locations[0].latLng.lng}`);
+  if(error) {
+    console.log('Unable to connect to Mapquest servers');
+  } else if (body.results[0].locations[0].geocodeQualityCode === "Z1XAA") {
+    console.log('Unable to find that address');
+  } else if (body.results[0].locations[0].geocodeQualityCode === "P1AAA") {
+    console.log('In last else if');
+    console.log(`Address: ${body.results[0].providedLocation.location}`);
+    console.log(`Lat: ${body.results[0].locations[0].latLng.lat}`);
+    console.log(`Lon: ${body.results[0].locations[0].latLng.lng}`);
+  }
+  // console.log(body.results[0]);
+  // console.log(`Address: ${body.results[0].providedLocation.location}`);
+  // console.log(`Lat: ${body.results[0].locations[0].latLng.lat}`);
+  // console.log(`Lon: ${body.results[0].locations[0].latLng.lng}`);
 });
