@@ -22,3 +22,8 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
     console.log(JSON.stringify(results, undefined, 2));
   }
 });
+
+// weatherCall https://api.darksky.net/forecast/19ee72e311de33072ce97fc8aca590d6/45.5767,-122.6387
+// console.log(`Current Temperature \(F\): ${body.currently.temperature}`);
+// 19ee72e311de33072ce97fc8aca590d6
+// https://api.darksky.net/forecast/19ee72e311de33072ce97fc8aca590d6/37.8267,-122.4233
