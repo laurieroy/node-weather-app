@@ -1,6 +1,7 @@
 const request = require('request');
 
 let geocodeAddress = (address, callback) => {
+  console.log(address);
   let encodedAddress =  encodeURIComponent(address);
   console.log(`Addy: ${encodedAddress}`);
   // if(address ==='') {
@@ -27,18 +28,20 @@ console.log(myURL + `key=` +`${myWxKey}` + myAddy);
     } else if (body.results[0].locations[0].geocodeQualityCode === "Z1XAA") {
       callback('Unable to find that address.');
       console.log('in first else if');
-    } else if (body.results[0].locations[0].geocodeQualityCode === "P1AAA") {
-      // callback(undefined, {
-      console.log(body.results[0].providedLocation.location);
-      console.log(body.results[0].locations[0].latLng.lat);
-      console.log(body.results[0].locations[0].latLng.lng);
-        // address: body.results[0].providedLocation.location,
-        // latitude: body.results[0].locations[0].latLng.lat,
-        // longitude: body.results[0].locations[0].latLng.lng
-      // });
-      //next line addedin for testing
+    } else if (body.info.statuscode === 0) {
+      callback(undefined, {
+      // console.log(body.results[0].providedLocation.location);
+      // console.log(body.results[0].locations[0].latLng.lat);
+      // console.log(body.results[0].locations[0].latLng.lng);
+        address: body.results[0].providedLocation.location,
+        latitude: body.results[0].locations[0].latLng.lat,
+        longitude: body.results[0].locations[0].latLng.lng
+      });
+      //next block addedin for testing. add in fix for zip
+    } else {
+      console.log('something else went wrong');
+      console.log(body);
     }
-    // }
   });
 };
 
