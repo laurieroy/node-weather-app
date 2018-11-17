@@ -1,16 +1,16 @@
 const request = require('request');
 
 let getWeather = (lat, lon, callback) => {
-  if(lat === ' ')  lat = '45.5767'; //these aren't working
-  if (lon === ' ') lon = '-122.6387';
+  // if(lat === ' ')  lat = '45.5767'; //these aren't working
+  // if (lon === ' ') lon = '-122.6387';
   let myLoc =   '/' + lat + ','+ lon;
       myWxKey = process.env.WX_WEATHER_APP_KEY,
       myUrl = 'https://api.darksky.net/forecast/';
 
-  console.log(myLoc);
-  console.log(myWxKey);
-  console.log(myUrl);
-  console.log(myUrl + myWxKey + myLoc);
+  // console.log(myLoc);
+  // console.log(myWxKey);
+  // console.log(myUrl);
+  // console.log(myUrl + myWxKey + myLoc);
 
   request({
     url: myUrl + myWxKey + myLoc,
