@@ -11,16 +11,16 @@ let geocodeAddress = (address, callback) => {
 
   let   myAddy  = `&location=${encodedAddress}`,
         myURL   = 'http://mapquestapi.com/geocoding/v1/address?',
-        myWxKey = process.env.MAP_WEATHER_APP_KEY;
+        myMapKey = process.env.MAP_WEATHER_APP_KEY;
 
 // console.log(myWxKey);
 // console.log(myURL);
 // console.log(body);
-console.log(myURL + `key=` +`${myWxKey}` + myAddy);
+console.log(myURL + `key=` +`${myMapKey}` + myAddy);
 
   request({
     //http://www.mapquestapi.com/geocoding/v1/address?key=KEY&location=1600+Pennsylvania+Ave+NW,Washington,DC,20500
-      url: myURL + `key=` + myWxKey + myAddy,
+      url: myURL + `key=` + myMapKey + myAddy,
       json: true 
   }, (error, response, body) => {
     if(error) {

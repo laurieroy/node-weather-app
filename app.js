@@ -1,6 +1,7 @@
 const yargs   = require('yargs');
 
-const geocode = require('./geocode/geocode');
+const geocode = require('./geocode/geocode'),
+      weather = require('./wxCall/weather');
 
 const argv = yargs
   .options({
@@ -15,15 +16,18 @@ const argv = yargs
   .alias('help', 'h')
   .argv;
 
-geocode.geocodeAddress(argv.address, (errorMessage, results) => {
-  if (errorMessage) {
+// geocode.geocodeAddress(argv.address, (errorMessage, results) => {
+//   if (errorMessage) {
+//     console.log(errorMessage);
+//   } else {
+//     console.log(JSON.stringify(results, undefined, 2));
+//   }
+// });
+
+weather.getWeather(45.5767,-122.6387, (errorMessage, weatherResults) => {
+  if(errorMessage) {
     console.log(errorMessage);
   } else {
-    console.log(JSON.stringify(results, undefined, 2));
+    console.log(JSON.stringify(weatherResults, undefined, 2));
   }
 });
-
-// weatherCall https://api.darksky.net/forecast/19ee72e311de33072ce97fc8aca590d6/45.5767,-122.6387
-// console.log(`Current Temperature \(F\): ${body.currently.temperature}`);
-// 19ee72e311de33072ce97fc8aca590d6
-// https://api.darksky.net/forecast/19ee72e311de33072ce97fc8aca590d6/37.8267,-122.4233
