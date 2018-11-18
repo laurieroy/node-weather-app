@@ -15,7 +15,7 @@ asyncAdd(5, 7).then((result) => {
   return asyncAdd(result, 33);
   console.log(errorMessage);
 }).then((result) => {
-  console.log('Should be 45', result);
+  console.log('Should be 45, our result: ', result);
 }).catch((errorMessage) => {
   console.log(errorMessage);
 });
