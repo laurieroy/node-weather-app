@@ -1,11 +1,16 @@
 # node-weather-app
 This is a console-based app where the user inputs an address, either street or
-city, state and its location is retrieved using the mapquest API. Using this
-location, the weather is called from the darksky API.
+city, state and its coordinates are retrieved using the mapquest API. Weather is
+then retrieved for this location using the darksky API.
 
-In console, type "node app.js --address '1301 lombard street Philadephia'"
+It was originally built using the request library:
+
+In the console, type "node app.js --address '1301 lombard street Philadephia'"
 or "node app.js -a 'Portland OR'". The app will fetch the current temperature
 for this location.
+
+Later, the app was refactored to use axios:
+"node app-promise.js -a 'Portland, OR'"
 
 Address is parsed using yargs, along with basic help functionality.
 
